@@ -1,4 +1,4 @@
-MeagerTesting.py - Inspired by Rachel Meager's paper on the metaanalysis of microcredit expansions (./refs/Meager_CreditProgEval.pdf), this repo provides a starting point for implementing models of treatment effects from A/B tests.  
+MeagerTesting - Inspired by Rachel Meager's paper on the metaanalysis of microcredit expansions (./refs/Meager_CreditProgEval.pdf), this repo provides a starting point for implementing models of treatment effects from A/B tests.  
 
 The model in ./src/MeagerTesting.py extends the model in the original paper to jointly estimate effects across all outcomes, times and treatments.
 
