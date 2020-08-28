@@ -87,6 +87,8 @@ class GPCATE(object):
         pars= {}
         # covariance factors
         with plt_tms:
+            # learning dt time step sizes
+            # if k(t1,t2) is independent of time, can instead learn scales and variances for RBF kernels that use data['time_vals']
             pars['dt0']= pyro.sample('dt0', dist.Normal(0,1))
             pars['dt1']= pyro.sample('dt1', dist.Normal(0,1))
 
@@ -167,7 +169,7 @@ class GPCATE(object):
         '''
         Model performance metrics
 
-        psisloo reweights samples of pointwise posterior likelihoods to approximate likelihoods under leave one out cross validation
+        psisloo reweights samples of pointwise posterior likelihoods to approximate data likelihood under leave one out cross validation
             ref: https://arxiv.org/pdf/1507.04544.pdf
         lmbd measures the extent to which parameters are pooled across individuals
             ref: http://www.stat.columbia.edu/~gelman/research/published/rsquared.pdf
@@ -188,7 +190,7 @@ class GPCATE(object):
 
     def get_data_dict(self, T, W, X, Y, S= 1e-7):
         data= { 'Y'           : torch.tensor(Y).float(),
-                'noise'       : torch.tensor(S),
+                'noise'       : torch.tensor(S).float(),
                 'individuals' : torch.LongTensor(X),
                 'treatments'  : torch.LongTensor(W)}
 
